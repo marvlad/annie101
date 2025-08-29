@@ -1,0 +1,5 @@
+DIR = /tmp 
+
+# example to check the memory
+disk:
+	@df -h /
