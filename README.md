@@ -1,7 +1,7 @@
 # annie101 
 
 This is part of annie101 tutorial. It has several directories: boost, cmake, cpp, makefiles, and sstream.
-Terminal 1:
+
 ```javascript
 ├── boost
 │   ├── advanced
