@@ -1,6 +1,3 @@
-# To run the example
-# g++ ExampleBoost02.cpp -I /opt/homebrew/Cellar/boost/1.89.0/include -L /opt/homebrew/Cellar/boost/1.89.0/lib -lboost_serialization -lboost_iostreams -o B2
-
 # Read and write
 
 With the ofstream we create an 'archive.dat'. In std::ofstream, of stands for 'output file' and the stream is for a sequence of data. The first argument is for the file and the second for the type of the file, in this case a binary `std::ofstream ofs("archive.dat", std::ios::binary);`
