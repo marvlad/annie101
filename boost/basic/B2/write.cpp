@@ -1,4 +1,4 @@
-// Here we will learn how to save a simple it in a 'archive.dat' 
+// Here we will learn how to save a simple int in an 'archive.dat' 
 
 #include <iostream> // for I/O operation
 #include <sstream>
