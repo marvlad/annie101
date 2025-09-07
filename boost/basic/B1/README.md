@@ -1,6 +1,6 @@
 # binary_oarchive
 
-If you have a variable `int`, for example, you can user `boost::archive::binary_oarchive` to serialize it into binary form inside of std::stringstream. 
+If you have a variable `int`, for example, you can use `boost::archive::binary_oarchive` to serialize it into a binary form inside of `std::stringstream`. 
 
 The difference between ifstream, ofstream and fstream: https://cplusplus.com/img/iostream.gif is `std::ofstream` (Output File Stream), `std::ifstream` (Input File Stream) and `std::stringstream`. Designed to treat strings as if they were input/output streams, allowing both reading from and writing to a string in memory.
 
