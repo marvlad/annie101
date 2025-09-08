@@ -38,7 +38,8 @@ Think this way: When you serialize data, send the binary bytes into this stream 
 `x` (C++ object) --> oa (binary_oarchive = serializer machine) --> ofs (output file stream = pipe to disk) --> "archive.dat" (file with serialized bytes)  
 
 
-How to run it? Use `compile.sh` script. `chmod +x compile.sh`
+# How to run it? 
+Use `compile.sh` script. `chmod +x compile.sh`
 ```javascript
 ./compile.sh read.cpp 
 ```
