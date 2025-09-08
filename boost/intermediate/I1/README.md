@@ -1,4 +1,4 @@
-I1
+# I1
 
 Here we use BoostStore store(true, 1), where 1 is text (1=text) boost::archive::text_oarchive.
 We set a value, retreve and save it. One may think that the values saved in data.bin are already text (test with cat data.bin).
