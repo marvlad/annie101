@@ -36,4 +36,7 @@ This is part of annie101 tutorial. It has several directories: boost, cmake, cpp
 ├── README.md
 └── sstream
 ```
-  
+
+# Tools needed
+
+We need c++ and `boost` which can be installed via `brew` or `apt` or others
