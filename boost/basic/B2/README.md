@@ -40,15 +40,20 @@ Serialization happens when you do `oa & x;`
 Think this way: When you serialize data, send the binary bytes into this stream (ofs), which writes them into the file
     
 `std::ofstream ofs("archive.dat", std::ios::binary);`
+
     --> opens the file archive.dat in binary mode, ready to accept bytes. (ofs = the pipe).
 
 `oost::archive::binary_oarchive oa(ofs);`
+
     --> builds a serializer machine (oa) that is wired directly to the pipe (ofs). It doesn’t store things itself — it just transforms objects into binary and hands them off to the stream.
 
 `a & x;`
+
     --> takes x, serializes it, and immediately pushes the result through ofs into archive.dat. Nothing is buffered inside oa for later; it goes straight to the file as soon as you call it.
 
-`x` (C++ object) --> oa (binary_oarchive = serializer machine) --> ofs (output file stream = pipe to disk) --> "archive.dat" (file with serialized bytes)  
+`x` (C++ object) 
+
+    --> oa (binary_oarchive = serializer machine) --> ofs (output file stream = pipe to disk) --> "archive.dat" (file with serialized bytes)  
 
 
 # How to run it? 
