@@ -1,16 +1,19 @@
 # Read and write
 
-With the ofstream we create an 'archive.dat'. In std::ofstream, of stands for 'output file' and the stream is for a sequence of data. The first argument is for the file and the second for the type of the file, in this case a binary `std::ofstream ofs("archive.dat", std::ios::binary);`
+With the ofstream we create an 'archive.dat'. In std::ofstream, which stands for 'output file' and the stream is for a sequence of data. The first argument is for the file and the second for the type of the file, in this case a binary 
+```std::ofstream ofs("archive.dat", std::ios::binary);```
 
-The Boost.Serialization has a class boost::archive::binary_oarchive facilitates the serialization of data into a binary format. In boost, archive is a concept representing a mechanism for 'storing' or 'retrieving' serialized data In this context 'o' in binary_oarchive is output. So, boost::archive::binary_oarchive is an output archive used for serializing data. The line below will serialize  into binary form inside stream Boost Serialization output archive, writes data in binary format into the given stream (std::ofstream) `boost::archive::binary_oarchive oa(ofs);`
+The Boost.Serialization has a class `boost::archive::binary_oarchive` which facilitates the serialization of data into a binary format. In boost, archive is a concept representing a mechanism for 'storing' or 'retrieving' serialized data. In this context 'o' in binary_oarchive is output. So, `boost::archive::binary_oarchive` is an output archive used for serializing data. The line below will serialize into binary form inside stream Boost Serialization output archive, then writes data in binary format into the given stream (std::ofstream) ```boost::archive::binary_oarchive oa(ofs);```
+
+Then to serialize we can define
 ```
 int x = 423;
 oa & x;  // serialized into file "archive.dat"
 ```
 x (int = 423) 
-    ---> oa (serializes into binary format) 
-    ---> ofs (writes bytes) 
-    ---> archive.dat (stores raw data)
+    `--->` oa (serializes into binary format) 
+    `--->` ofs (writes bytes) 
+    `--->` archive.dat (stores raw data)
 
   oa does the serialization
   fs does the writing to file
