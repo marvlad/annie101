@@ -25,13 +25,16 @@ x (int = 423)
     ---> archive.dat (stores raw data)
 ```
 `oa` does the serialization
+
 `fs` does the writing to file
 
 The order is as follows:
+
     - ofs = opens the file → a “pipe” to archive.dat.
+    
     - oa = constructed, and attached to ofs
-    Serialization happens when you do 
-    oa & x;
+    
+    Serialization happens when you do `oa & x;`
 
 - Serialization happens inside binary_oarchive when you call oa & x;
 - Saving happens immediately after, because oa is writing into ofs, and ofs is connected to archive.dat.
