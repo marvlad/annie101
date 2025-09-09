@@ -5,10 +5,10 @@ With this code we extract the MRD part from the RAWData with all the tools learn
 ## Linux (example ubuntu)
 Install the following
 ```
-sudo apt update; sudo apt install git -y; sudo apt install cmake -y; sudo apt install g++ -y
+sudo apt update git cmake g++ -y
 ```
 
-For boost in linux
+boost in linux
 ```
 wget https://archives.boost.io/release/1.89.0/source/boost_1_89_0.tar.gz
 tar xzf boost_1_89_0.tar.gz
@@ -21,7 +21,7 @@ sudo ./b2 install
 ```
 
 ## Mac (apple chip)
-Use `brew`:
+Boost with `brew`:
 ```
 brew install boost
 ```
