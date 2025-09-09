@@ -1,8 +1,9 @@
 # annie101 
 
-This is part of annie101 tutorial. It has several directories: boost, cmake, cpp, makefiles, and sstream.
+This is parts of the LAPPD software tutorial session. The idea with the annie101 is to undesrtan the ANNIE's ToolAnalysis. In order to undesrtand the tutorial startat from basic c++, Makefile, CMAKE, sstream, and Boost exameples. Addtionally in boost dir there is a Tools directory with classes used in ToolAnalsys.
 
-```javascript
+## Content
+```
 ├── boost
 │   ├── advanced
 │   │   ├── A1
@@ -33,10 +34,9 @@ This is part of annie101 tutorial. It has several directories: boost, cmake, cpp
 │   ├── makefile_01
 │   ├── makefile_02
 │   ├── makefile_03
-├── README.md
 └── sstream
 ```
 
-# Tools needed
+## Tools needed
 
 We need c++ and `boost` which can be installed via `brew` or `apt` or others
