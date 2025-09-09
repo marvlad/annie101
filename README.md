@@ -1,6 +1,6 @@
 # annie101 
 
-This is parts of the LAPPD software tutorial session. The idea with the **annie101** is to undesrtand the ANNIE's _ToolAnalysis_. In order to undesrtand the tutorial startat from basic c++, Makefile, CMAKE, sstream, and Boost examples. Addtionally in boost dir there is a Tools directory with classes used in ToolAnalsys.
+This is parts of the LAPPD software tutorial session. The idea with the **annie101** is to undesrtand the ANNIE's [_ToolAnalysis_](https://github.com/ANNIEsoft/ToolAnalysis). In order to undesrtand the tutorial startat from basic c++, Makefile, CMAKE, sstream, and Boost examples. Addtionally in boost dir there is a Tools directory with classes used in ToolAnalsys.
 
 ## Content
 ```
