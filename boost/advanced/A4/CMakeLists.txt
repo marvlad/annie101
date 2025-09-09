@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.10)
 project(BoostStore)
 
 # Set C++ standard to C++17
-set(CMAKE_CXX_STANDARD 17) 
-set(CMAKE_CXX_STANDARD_REQUIRED ON) 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Compiler flags
 set(GCC_Flags_For_CXX "-Wall -fPIC -pthread -Wformat=0")
@@ -22,13 +22,14 @@ else()
     message(FATAL_ERROR "Boost not found. Please ensure Boost is installed.")
 endif()
 
-# Find ROOT package
-find_package(ROOT REQUIRED COMPONENTS Hist)
+# Find ROOT package (not required)
+find_package(ROOT COMPONENTS Hist)
 if(ROOT_FOUND)
+    add_definitions(-DHAVE_ROOT) # Define HAVE_ROOT only if ROOT is found
     include_directories(${ROOT_INCLUDE_DIRS})
     link_directories(${ROOT_LIBRARY_DIRS})
 else()
-    message(FATAL_ERROR "ROOT not found. Please ensure ROOT is installed.")
+    message(WARNING "ROOT not found. ROOT-dependent features will be disabled.")
 endif()
 
 # Include directories for ZeroMQ
@@ -52,8 +53,10 @@ target_link_libraries(${PROJECT_NAME}
     Boost::date_time
     Boost::serialization
     Boost::iostreams
-    ${ROOT_LIBRARIES}
 )
+if(ROOT_FOUND)
+    target_link_libraries(${PROJECT_NAME} ${ROOT_LIBRARIES})
+endif()
 
 # Clean target (optional, CMake handles this differently)
 set_directory_properties(PROPERTIES ADDITIONAL_CLEAN_FILES
