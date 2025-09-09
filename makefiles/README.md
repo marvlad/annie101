@@ -1,5 +1,5 @@
-ToDo:
-	Homework:
+## ToDo:
+	### Homework:
 
 	Make a Makefile that compiles a LaTeX code 'code.tex' with pdflatex as follows:
         1) Make a rule named `pdf` that compiles the code and removes all other outputs and keeps the .pdf
