@@ -35,7 +35,7 @@ endif()
 include_directories(
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/../../Tools
-    ${CMAKE_SOURCE_DIR}/../../Tools/zmq/zeromq-4.0.7/include
+    # ${CMAKE_SOURCE_DIR}/../../Tools/zmq/zeromq-4.0.7/include
 )
 
 # Link directories for ZeroMQ
