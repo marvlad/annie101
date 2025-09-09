@@ -35,12 +35,6 @@ endif()
 include_directories(
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/../../Tools
-    # ${CMAKE_SOURCE_DIR}/../../Tools/zmq/zeromq-4.0.7/include
-)
-
-# Link directories for ZeroMQ
-link_directories(
-    ${CMAKE_SOURCE_DIR}/../../Tools/zmq/zeromq-4.0.7/lib
 )
 
 # Source files
@@ -58,7 +52,6 @@ target_link_libraries(${PROJECT_NAME}
     Boost::date_time
     Boost::serialization
     Boost::iostreams
-    zmq 
     ${ROOT_LIBRARIES}
 )
 
