@@ -9,8 +9,11 @@
 #include <math.h>
 #include <cstdint>
 #include "MRDOut.h"
+
+#ifdef HAVE_ROOT
 #include"TFile.h"
 #include"TTree.h"
+#endif
 
 //using namespace std;
 int verbose = 0;
@@ -28,6 +31,7 @@ uint64_t toUTC(long TimeStamp){
     return timestamp;
 }
 
+#ifdef HAVE_ROOT
 void saveToRootfile(BoostStore *MRDData) {
     std::cout << " ------------ MRD Data 2 ROOTFILE ---------------" << std::endl;
     
@@ -83,6 +87,7 @@ void saveToRootfile(BoostStore *MRDData) {
     f->Close();
     delete f; // Clean up
 }
+#endif
 
 void printMRDInfo(BoostStore *MRDData, int MRDEntryNum){
 	MRDData->GetEntry(MRDEntryNum);
@@ -190,7 +195,9 @@ int main(int argc, char* argv[]){
 	for(int i=0; i<trigtotalentriesMRD; i++) printMRDInfo(MRDData,i);
 
 	// Saving in rootfile
+	#ifdef HAVE_ROOT	
 	saveToRootfile(MRDData);	
+	#endif
 
 	return 0;
 }
