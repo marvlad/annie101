@@ -2,8 +2,8 @@
 
 With this code we extract the MRD part from the RAWData with all the tools learned in the previous examples. Multiple parts of the this code were shamelessly copy from several parts of the ToolAnalysis
 
-## In linux (example ubuntu)
-Install the follorn
+## Linux (example ubuntu)
+Install the following
 ```
 sudo apt update; sudo apt install git -y; sudo apt install cmake -y; sudo apt install g++ -y
 ```
@@ -20,7 +20,7 @@ cd boost_1_89_0
 sudo ./b2 install
 ```
 
-## Mac os
+## Mac (apple chip)
 Use `brew`:
 ```
 brew install boost
