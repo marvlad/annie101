@@ -1,5 +1,5 @@
 // The idea here is to extract the MRD part from the RAWData with all the tools learned 
-// in the previus examples.  Multiple parts of the this code were shamelessly copy from 
+// in the previous examples.  Multiple parts of the this code were shamelessly copy from 
 // several parts of the ToolAnalysis
 
 #include<iostream>
