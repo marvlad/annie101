@@ -159,13 +159,19 @@ void printMRDInfo(BoostStore *MRDData, int MRDEntryNum){
  	 }
 }
 
-int main(){
-	BoostStore *RawData = new BoostStore(false,0);
-	//RawData->Initialise("../data/RAWDataR5452S0p60");
-	RawData->Initialise("../data/RAWDataR5454S0p131");
-	RawData->Print(false);
-	
-	std::cout << " ------ Accesing to MRD Data BoostStore ---------\n"; 
+int main(int argc, char* argv[]){
+    if(argc < 2){
+       std::cerr << "Usage: " << argv[0] << " <RAWData file (example RAWDataR5454S0p131)>" << std::endl;
+       return 1;
+    }
+
+    std::string rawdata_file = argv[1];
+
+    BoostStore *RawData = new BoostStore(false,0);
+    RawData->Initialise(rawdata_file);
+    RawData->Print(false);
+
+    std::cout << " ------ Accesing to MRD Data BoostStore ---------\n";
 	BoostStore *MRDData = new BoostStore(false,2);
 	RawData->Get("CCData",*MRDData);
 	MRDData->Print(false);
@@ -178,7 +184,7 @@ int main(){
 	// Fuck we need to define the MRD class 'MRDOut'
 	//MRDOut* Mdata = new MRDOut;
 	//MRDData->Get("Data",*Mdata);
-        // int MRDEntryNum = 1; // we will need a for loop from 0 to trigtotalentriesMRD to get all data in this rawfile
+    // int MRDEntryNum = 1; // we will need a for loop from 0 to trigtotalentriesMRD to get all data in this rawfile
 
 	// Print out the values
 	for(int i=0; i<trigtotalentriesMRD; i++) printMRDInfo(MRDData,i);
