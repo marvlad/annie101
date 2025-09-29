@@ -67,10 +67,15 @@ void saveToRoot(const std::vector<std::map<std::vector<int>, std::vector<uint16_
     f->Close();
     delete f; // Clean up
 }
-int main(){
-	BoostStore *RawData = new BoostStore(false,0);
-	RawData->Initialise("../data/RAWDataR5452S0p60");
-	RawData->Print(false);
+int main(int argc, char* argv[]){
+    if(argc < 2){ 
+      std::cerr << "Usage: " << argv[0] << " <RAWData file>" << std::endl;
+      return 1;
+    }   
+    std::string rawdata_file = argv[1];
+    BoostStore *RawData = new BoostStore(false,0);
+    RawData->Initialise(rawdata_file);
+    RawData->Print(false);
 	
 	std::cout << " ------ Accesing to PMTData BoostStore ---------\n"; 
 	BoostStore *PMTData = new BoostStore(false,2);
