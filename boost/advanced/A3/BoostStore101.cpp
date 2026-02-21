@@ -97,8 +97,7 @@ int main(int argc, char* argv[]){
 	int FIFOstate;
 	std::vector<std::map<std::vector<int>, std::vector<uint16_t>>> Fulldata;
 	
-	// Accessing to the class
-	
+	// Accessing to the class	
 	int verb = 1;
 	for (unsigned int CardDataIndex=0; CardDataIndex<Cdata->size(); CardDataIndex++){
 

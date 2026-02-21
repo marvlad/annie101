@@ -6,7 +6,6 @@
 #include <vector>
 //#include <array>
 #include <stdlib.h>
-#include "zmq.hpp"
 #include <SerialisableObject.h>
 
 class CardData : public SerialisableObject{
@@ -25,8 +24,8 @@ class CardData : public SerialisableObject{
 
   bool Print(){return true;};
 
-  void  Send(zmq::socket_t *socket, int flag=0);
-  bool Receive(zmq::socket_t *socket);
+  //void  Send(zmq::socket_t *socket, int flag=0);
+  //bool Receive(zmq::socket_t *socket);
 
  private:
 
