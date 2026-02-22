@@ -21,7 +21,7 @@ void plotWaveform() {
     std::vector<double> *Amplitude = nullptr;
 
     // Set branch addresses
-    PMTTree->SetBranchAddress("Event", &Event);
+    PMTTree->SetBranchAddress("TriggerEntry", &Event);
     PMTTree->SetBranchAddress("Crate", &CrateNum);
     PMTTree->SetBranchAddress("Slot", &SlotNum);
     PMTTree->SetBranchAddress("Channel", &ChannelID);
@@ -30,9 +30,12 @@ void plotWaveform() {
     // Loop through entries to find the matching event
     bool found = false;
     Long64_t nEntries = PMTTree->GetEntries();
+    std::cout << " nEntries = " << nEntries << std::endl;
     for (Long64_t i = 0; i < nEntries; i++) {
         PMTTree->GetEntry(i);
-        if (Event == 2 && CrateNum == 1 && SlotNum == 4 && ChannelID == 1) {
+        //std::cout << "Event " << Event << std::endl;
+        if (Event == 1 && CrateNum == 1 && SlotNum == 4 && ChannelID == 1) {
+        //if (CrateNum == 1 && SlotNum == 4 && ChannelID == 1) {
             found = true;
 
             // Create histogram for the waveform
@@ -46,7 +49,7 @@ void plotWaveform() {
             }
 
             // Create a canvas and draw the histogram
-            TCanvas *c1 = new TCanvas("c1", "PMT Waveform", 800, 600);
+            TCanvas *c1 = new TCanvas("c1", "PMT Waveform", 720, 600);
             hWaveform->Draw("HIST");
             c1->Update();
 
@@ -60,7 +63,6 @@ void plotWaveform() {
         std::cerr << "Error: No entry found for Event==2, Crate==1, Slot==4, Channel==1" << std::endl;
     }
 
-    // Clean up
     f->Close();
     delete f;
 }
