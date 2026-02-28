@@ -5,6 +5,8 @@ This is parts of the LAPPD software tutorial session. The idea with the **annie1
 ## Content
 ```
 ├── grid
+│   ├── annie101_A3
+│   ├── grid-temp
 ├── boost
 │   ├── advanced
 │   │   ├── A1
