@@ -1,23 +1,30 @@
-# ANNIE PMT Data (grid)
+# ANNIE PMT Data Processing (Grid)
 
-## Classes used:
-This is a simple test to run in the grid. The main python script is 
-- `grid-temp`
+This repository provides a lightweight workflow to process ANNIE PMT data on the grid using an Apptainer container environment.
 
-It will produce the following scripts: `submit_job.sh, grid_instructions.sh, and instructions_into_container.sh`. For this case we won't use `instructions_into_container.sh`
+---
 
-## Step 1 
-`python3 grid-temp`
+## Overview
 
-## Step 2
-Modify in the `submit_job.sh` the INPUT_PATH and OUTPUT_PATH. Similarly in the change grid_instructions.sh  the GRIDUSER
+The main script is:
 
-## Step 3
-Compile the code in `annie101_A3` (one way is to access to the container and source Setup.sh and make)
+`grid-temp`
 
-## Step 4
-Compress annie101_A3 (`tar -cvzf annie101_A3.tar.gz annie101_A3`) and copy to INPUT_PATH
+Running this script generates the required grid submission files:
 
-## Step 5
-Run `submit_job.sh` like `./submit_job.sh RUN_NUMBER PARTIFILE`
+- `submit_job.sh`
+- `grid_instructions.sh`
+- `instructions_into_container.sh`
 
+> **Note:** In this workflow, `instructions_into_container.sh` is not used.
+
+---
+
+## Workflow
+
+### Step 1 — Generate Grid Scripts
+
+Run:
+
+```bash
+python3 grid-temp
