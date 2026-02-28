@@ -21,7 +21,7 @@ Running this script generates the required grid submission files:
 ---
 
 ## Workflow
-
+---
 ### Step 1 — Generate Grid Scripts
 
 Run:
@@ -29,6 +29,7 @@ Run:
 ```bash
 python3 grid-temp
 ```
+---
 ### Step 2 — Configure Grid Parameters
 
 Before submitting jobs, edit the following files:
@@ -40,11 +41,11 @@ submit_job.sh
 
 grid_instructions.sh
 Modify:
-
 - GRIDUSER
 
 Ensure that the paths and user configuration match your grid environment.
 
+---
 ### Step 3 — Compile the Code
 
 Compile the code inside the annie101_A3 directory.
@@ -59,6 +60,7 @@ Alternatively:
 - Source Setup.sh.
 - Run make.
 
+---
 ### Step 4 — Package the Code
 Compress the compiled directory:
 ```
@@ -66,6 +68,7 @@ tar -cvzf annie101_A3.tar.gz annie101_A3
 ```
 Then copy the tarball to your configured `INPUT_PATH`.
 
+---
 ### Step 5 — Submit the Job
 Submit a grid job using:
 ```
