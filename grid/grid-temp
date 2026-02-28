@@ -1,0 +1,136 @@
+#!/usr/bin/env python3
+# GENERAL FNAL GRID JOBS — template generator (no args)
+#
+# Generates in the current directory:
+#   - submit_job.sh
+#   - grid_instructions.sh
+#   - instructions_into_container.sh
+#
+# Usage:
+#   python3 grid-template.py
+#   ./submit_job.sh
+
+import os
+
+def write_exe(fname: str, text: str) -> None:
+    with open(fname, "w") as f:
+        f.write(text)
+    os.chmod(fname, 0o755)
+
+def make_submit_job_sh():
+    return """#!/bin/bash
+
+# template JobSubmitter script
+export SCRIPT_PATH=$PWD
+export INPUT_PATH=/pnfs/annie/persistent/users/mascenci/general_grid/input/annie101
+export INPUT_DATA=/pnfs/annie/persistent/raw/raw/$1
+export OUTPUT_FOLDER=/pnfs/annie/persistent/users/mascenci/general_grid/output/annie101
+
+QUEUE=medium
+rm -rf $OUTPUT_FOLDER
+mkdir -p $OUTPUT_FOLDER
+
+echo "Submitting job..."
+jobsub_submit -N 1 --memory=4000MB --expected-lifetime=${QUEUE} -G annie --disk=30GB \\
+  -f ${INPUT_PATH}/annie101_A3.tar.gz \\
+  -f ${INPUT_DATA}/RAWDataR$1S0p$2 \\
+  -d OUTPUT $OUTPUT_FOLDER \\
+  file://${SCRIPT_PATH}/grid_instructions.sh
+"""
+
+def make_grid_instructions_sh():
+    return """#!/bin/bash
+
+# template Instructions script
+
+# general grid
+cat <<EOF
+condor   dir: $CONDOR_DIR_INPUT
+process   id: $PROCESS
+output   dir: $CONDOR_DIR_OUTPUT
+EOF
+
+HOSTNAME=$(hostname -f)
+GRIDUSER='mascenci'
+
+LOGFILE=/srv/log.log
+
+echo "Job starting on $(uname -a)"
+
+DUMMY_OUTPUT_FILE=${CONDOR_DIR_OUTPUT}/${JOBSUBJOBID}_dummy_output
+touch ${DUMMY_OUTPUT_FILE}
+
+echo "Starts the log:::::::::"  > $LOGFILE
+
+${JSB_TMP}/ifdh.sh cp -D $CONDOR_DIR_INPUT/annie101_A3.tar.gz .
+echo "ls -lrt ..after cp " >> $LOGFILE
+ls -lrt >> $LOGFILE
+
+tar -xzvf annie101_A3.tar.gz
+rm annie101_A3.tar.gz
+
+export run_number=$(($PROCESS + 1))
+
+cd annie101_A3
+${JSB_TMP}/ifdh.sh cp -D $CONDOR_DIR_INPUT/RAWDataR* .
+
+for f in RAWDataR*; do
+    if [[ $f =~ RAWDataR([0-9]+)S[0-9]+p([0-9]+) ]]; then
+        runn=${BASH_REMATCH[1]}
+        partfile=${BASH_REMATCH[2]}
+    fi  
+done
+
+echo "run $runn" >> $LOGFILE
+echo "partfile $partfile" >> $LOGFILE
+
+echo "ls -lrt ..after cp data " >> $LOGFILE
+ls -lrt >> $LOGFILE
+
+echo "Check run process ... " >> $LOGFILE
+echo $run_number >> $LOGFILE
+
+# running inside of the container
+
+apptainer exec -B/srv:/srv,${CONDOR_DIR_INPUT},${PWD}:/annie101,${TMPDIR}:/tmp \\
+  /cvmfs/singularity.opensciencegrid.org/anniesoft/toolanalysis\:latest/ bash --noprofile --norc -c 'source ./Setup.sh && ./BoostStore RAWData* > inside_log.log'
+
+echo "After running in the container ... " >> $LOGFILE
+echo "ls -lrt" >> $LOGFILE
+ls -lrt >> $LOGFILE
+
+mkdir -p ${CONDOR_DIR_OUTPUT}/run_${runn}_${partfile}/
+${JSB_TMP}/ifdh.sh cp -D *.root ${CONDOR_DIR_OUTPUT}/run_${runn}_${partfile}
+${JSB_TMP}/ifdh.sh cp -D /srv/*.log ${CONDOR_DIR_OUTPUT}/run_${runn}_${partfile}
+${JSB_TMP}/ifdh.sh cp -D *.log ${CONDOR_DIR_OUTPUT}/run_${runn}_${partfile}
+echo "Cleaning up:" >> ${DUMMY_OUTPUT_FILE}
+"""
+
+def make_instructions_into_container_sh():
+    # Generic placeholder you edit to run your real command inside the container.
+    return """#!/bin/bash
+
+# template instructions executed INSIDE the container
+# Called as: instructions_into_container.sh <run_number>
+
+source Setup.sh
+./BoostStore RAWDataR5090S0p217 > inside_log.log
+"""
+
+def main():
+    write_exe("submit_job.sh", make_submit_job_sh())
+    write_exe("grid_instructions.sh", make_grid_instructions_sh())
+    write_exe("instructions_into_container.sh", make_instructions_into_container_sh())
+
+    print("Generated:")
+    print("  submit_job.sh")
+    print("  grid_instructions.sh")
+    print("  instructions_into_container.sh")
+    print("")
+    print("Next:")
+    print("  chmod +x submit_job.sh grid_instructions.sh instructions_into_container.sh  # already done")
+    print("  edit SCRIPT_PATH in submit_job.sh to this directory")
+    print("  ./submit_job.sh")
+
+if __name__ == "__main__":
+    main()
