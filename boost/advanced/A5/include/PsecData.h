@@ -1,7 +1,6 @@
 #ifndef PSECDATA_H
 #define PSECDATA_H
 
-#include "zmq.hpp"
 #include <SerialisableObject.h>
 #include <iostream>
 #include <vector>
