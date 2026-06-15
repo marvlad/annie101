@@ -20,9 +20,6 @@ class PsecData{
     PsecData(unsigned int id);
     ~PsecData();
 
-    bool Send(zmq::socket_t* sock);
-    bool Receive(zmq::socket_t* sock);
-
     //General data
     unsigned int VersionNumber;
     unsigned int LAPPD_ID;
