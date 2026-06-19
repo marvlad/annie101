@@ -390,7 +390,7 @@ int getParsedData(std::vector<unsigned short> buffer, int ch_start)
             InfoWord.push_back((unsigned short)*bit);
             if (InfoWord.size() == NUM_SAMP)
             {
-                data.insert(pair<int, vector<unsigned short>>(ch_start + channel_count, InfoWord));
+                ::data.insert(pair<int, vector<unsigned short>>(ch_start + channel_count, InfoWord));
                 if (LAPPDStoreReadInVerbosity > 5)
                     cout << "inserted data to channel " << ch_start + channel_count << endl;
                 InfoWord.clear();
@@ -780,8 +780,8 @@ bool DoPedestalSubtract()
     if (LAPPDStoreReadInVerbosity > 3)
     {
         // print the size of data and all keys, and the size of PedestalValues and all keys
-        cout << "Size of data is " << data.size() << endl;
-        for (std::map<int, vector<unsigned short>>::iterator it = data.begin(); it != data.end(); ++it) // looping over the data map by channel number, from 0 to 60
+        cout << "Size of data is " << ::data.size() << endl;
+        for (std::map<int, vector<unsigned short>>::iterator it = ::data.begin(); it != ::data.end(); ++it) // looping over the data map by channel number, from 0 to 60
         {
             cout << it->first << ", ";
         }
@@ -794,7 +794,7 @@ bool DoPedestalSubtract()
         cout << endl;
     }
     // Loop over data stream
-    for (std::map<int, vector<unsigned short>>::iterator it = data.begin(); it != data.end(); ++it) // looping over the data map by channel number, from 0 to 60
+    for (std::map<int, vector<unsigned short>>::iterator it = ::data.begin(); it != ::data.end(); ++it) // looping over the data map by channel number, from 0 to 60
     {
         int wrongPedChannel = 0;
         if (LAPPDStoreReadInVerbosity > 5)
